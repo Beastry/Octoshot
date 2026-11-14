@@ -185,7 +185,7 @@
 "Octoshot" = "一酱";
 "View on GitHub" = "在 GitHub 上查看";
 "Open User Guide" = "打开使用指南";
-"Released under the MIT License." = "本应用以 MIT 许可证发布。";
+"First-party code is released under GPL-3.0-only." = "第一方代码以 GPL-3.0-only 许可证发布。";
 "Embedded AI weights: SmolVLM2 (Apache-2.0, mlx-community) and pix2tex-mfr GGUF (MIT, cstr). MLX Swift LM is Apache-2.0." = "内置 AI 模型权重：SmolVLM2（Apache-2.0，mlx-community）与 pix2tex-mfr GGUF（MIT，cstr）。MLX Swift LM 使用 Apache-2.0 许可证。";
 "Not checked" = "尚未检查";
 "On-device SmolVLM2 + pix2tex LaTeX specialist; optional Ollama fallback" = "本机 SmolVLM2 与 pix2tex LaTeX 专用模型，可选 Ollama 后备服务";

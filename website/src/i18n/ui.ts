@@ -93,7 +93,7 @@ const en: LandingCopy = {
   navFaq: 'FAQ',
   navDocs: 'Docs',
   navDownload: 'Download',
-  heroEyebrow: 'macOS · MIT · local-first',
+  heroEyebrow: 'macOS · GPL-3.0-only · local-first',
   heroTitle: 'More screenshots? …Fine. Eight arms, one pass.',
   heroLead:
     'I’m 一酱—Octoshot’s mascot and your menu-bar screenshot butler. Native capture for region, window, and full screen; scroll stitch, MP4, GIF, annotate, OCR/LaTeX, and pin—complaining the whole time, actually doing the work.',
@@ -181,7 +181,7 @@ const en: LandingCopy = {
     },
     {
       title: 'Open source',
-      body: 'MIT licensed. Inspect, fork, and wire your own workflows.',
+      body: 'GPL-3.0-only. Inspect and modify the first-party code, and share it under the same license.',
     },
   ],
   stepsTitle: 'Get started in minutes',
@@ -203,7 +203,7 @@ const en: LandingCopy = {
   faqs: [
     {
       q: 'Is Octoshot free?',
-      a: 'Yes. Octoshot is MIT-licensed open source. Releases are published on GitHub.',
+      a: 'Yes. Downloads are free of charge. First-party source is GPL-3.0-only. Releases are published on GitHub.',
     },
     {
       q: 'Does it upload screenshots to the cloud?',
@@ -240,7 +240,7 @@ const zh: LandingCopy = {
   navFaq: '常见问题',
   navDocs: '文档',
   navDownload: '下载',
-  heroEyebrow: '菜单栏截图管家 · macOS · MIT',
+  heroEyebrow: '菜单栏截图管家 · macOS · GPL-3.0-only',
   heroTitle: '又要截图？……行吧，八只手给你一次截完。',
   heroLead:
     '我是一酱，Octoshot 的吉祥物，也是你菜单栏里那个不爱说话但手很快的管家：区域/窗口/全屏、滚动拼接、录屏与 GIF、标注、OCR/LaTeX、钉住——嘴上嫌麻烦，手上照做。',
@@ -319,7 +319,7 @@ const zh: LandingCopy = {
   agentTiles: [
     { title: '默认本机', body: '不上传云端；权限留在你的 Mac。' },
     { title: 'OctoshotCore', body: 'GUI 与自动化入口共享同一框架。' },
-    { title: '开源', body: 'MIT 许可，可审查、分叉并接入自己的工作流。' },
+    { title: '开源', body: 'GPL-3.0-only。可审查、修改第一方代码，并在同一许可证下分享。' },
   ],
   stepsTitle: '几分钟上手',
   steps: [
@@ -338,7 +338,7 @@ const zh: LandingCopy = {
   ],
   faqTitle: '常见问题',
   faqs: [
-    { q: '一酱免费吗？', a: '是。MIT 开源，发行版在 GitHub 发布。' },
+    { q: '一酱免费吗？', a: '是。下载免费。第一方源代码为 GPL-3.0-only，发行版在 GitHub 发布。' },
     { q: '会上传截图到云端吗？', a: '不会。捕获与可选本机模型均在本地运行，除非你自行配置外部接口。' },
     {
       q: '一酱是谁？',

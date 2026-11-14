@@ -54,10 +54,10 @@ Inference loads weights from Application Support via `VLMModelFactory.shared.loa
 
 ## Licenses
 
-- Octoshot app: **MIT**
+- Octoshot first-party code and docs: **GPL-3.0-only** (Copyright (c) 2026 neardws). See [LICENSES/README.md](../LICENSES/README.md). Copies already received under the previous MIT license keep that MIT grant; the original copyright and permission notice is in [LICENSES/MIT-legacy.txt](../LICENSES/MIT-legacy.txt).
 - SmolVLM2 weights: **Apache-2.0**
 - pix2tex-mfr GGUF: **MIT**
 - mlx-swift-lm: **Apache-2.0**
 - llama.cpp binaries: **MIT**
 
-See **Settings → About** for a short attribution blurb.
+Sparkle 2 (sparkle-project/Sparkle, from 2.10.0) stays under the upstream Sparkle license. It is not vendored here and is not part of the first-party GPL grant. See **Settings → About** for the short model-weight attribution blurb. Those model lines are unchanged.
