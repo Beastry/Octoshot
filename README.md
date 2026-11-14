@@ -106,7 +106,7 @@ tccutil reset ScreenCapture com.neardws.Octoshot
 
 ## 应用内更新（Sparkle）
 
-正式发布的 Octoshot 通过 Sparkle 2 检查 [站点上的 appcast](https://beastry.github.io/Octoshot/appcast.xml)。菜单栏或 **设置 → 关于** 中可选择 **检查更新…**。维护者签名与发布流程见 [Docs/sparkle.md](Docs/sparkle.md)。
+从本分支构建的新版本通过 Sparkle 2 检查 [GitHub Releases appcast](https://github.com/Beastry/Octoshot/releases/latest/download/appcast.xml)。签名流程只准备草稿；人工审核后发布为 stable/latest 才会切换更新。菜单栏或 **设置 → 关于** 中可选择 **检查更新…**。已安装的 0.3.2 及更早版本仍请求旧域名（当前 404），不会自动迁移；Pages feed 也不会随 Releases 自动更新。兼容计划和维护者流程见 [Docs/sparkle.md](Docs/sparkle.md)。
 
 ## 参与贡献
 
@@ -248,7 +248,7 @@ Relaunch the app and enable it again under **Privacy & Security → Screen Recor
 
 ## In-app updates (Sparkle)
 
-New Octoshot releases use Sparkle 2 to read the [site appcast](https://beastry.github.io/Octoshot/appcast.xml). Use **Check for Updates…** from the menu bar or **Settings → About**. Already-installed v0.3.2 and earlier clients are not migrated by this change; the required separate legacy HTTPS redirect or proxy, maintainer signing, and appcast generation are documented in [Docs/sparkle.md](Docs/sparkle.md).
+New builds from this branch use Sparkle 2 to read the [GitHub Releases appcast](https://github.com/Beastry/Octoshot/releases/latest/download/appcast.xml). The workflow prepares a draft only; human publication as stable/latest enables delivery. Use **Check for Updates…** from the menu bar or **Settings → About**. Already-installed v0.3.2 and earlier clients still request the old domain (currently 404) and are not migrated. Pages is no longer the official new-build feed and is not updated automatically by Releases. The separate compatibility plan, maintainer signing, and appcast generation are documented in [Docs/sparkle.md](Docs/sparkle.md).
 
 ## Contributing
 

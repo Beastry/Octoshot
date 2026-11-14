@@ -5,8 +5,7 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[2]
-FEED_URL = "https://beastry.github.io/Octoshot/appcast.xml"
-SITE_URL = "https://beastry.github.io/Octoshot/"
+FEED_URL = "https://github.com/Beastry/Octoshot/releases/latest/download/appcast.xml"
 DOWNLOAD_PREFIX = "https://github.com/Beastry/Octoshot/releases/download/v${VERSION}/"
 
 
@@ -29,7 +28,7 @@ class ReleaseURLTests(unittest.TestCase):
         script = (ROOT / "Scripts/generate-appcast.sh").read_text()
         for option, expected in (
             ("--download-url-prefix", DOWNLOAD_PREFIX),
-            ("--link", SITE_URL),
+            ("--link", FEED_URL),
         ):
             with self.subTest(option=option):
                 match = re.search(re.escape(option) + r'\s+"([^"]+)"', script)
@@ -39,9 +38,19 @@ class ReleaseURLTests(unittest.TestCase):
     def test_no_legacy_release_url_defaults(self):
         for name in ("Octoshot/Info.plist", "Scripts/generate-appcast.sh"):
             text = (ROOT / name).read_text()
-            for legacy in ("github.com/neardws/Octoshot", "www.neardws.com/Octoshot"):
+            for legacy in (
+                "github.com/neardws/Octoshot",
+                "www.neardws.com/Octoshot",
+                "https://beastry.github.io/Octoshot/appcast.xml",
+            ):
                 with self.subTest(path=name, legacy=legacy):
                     self.assertNotIn(legacy, text)
+
+    def test_generator_keeps_feed_out_of_published_website(self):
+        script = (ROOT / "Scripts/generate-appcast.sh").read_text()
+        self.assertIn('APPCAST_PATH="${APPCAST_PATH:-dist/appcast.xml}"', script)
+        self.assertNotIn("website/public/appcast.xml", script)
+        self.assertIn('python3 Scripts/check-arm64-appcast.py "$STAGE/appcast.xml"', script)
 
     def test_website_repository_urls(self):
         config = (ROOT / "website/src/config/assets.ts").read_text()

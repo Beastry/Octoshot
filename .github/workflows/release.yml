@@ -1,0 +1,43 @@
+name: Prepare macOS draft release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to prepare (does not create a tag or publish)
+        required: true
+        default: v0.3.3
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  prepare-draft:
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    # Required ceiling for the reusable workflow's final draft-upload job.
+    # Its guard/package jobs retain contents: read and draft receives no signing secrets.
+    permissions:
+      contents: write
+    uses: Beastry/macos-release/.github/workflows/release.yml@017a72f883a47b375ac5e653e78bfd0befdc3212
+    with:
+      toolkit-ref: 017a72f883a47b375ac5e653e78bfd0befdc3212
+      expected-repository: Beastry/Octoshot
+      tag: ${{ inputs.tag }}
+      package-command: |
+        command -v xcodegen >/dev/null || brew install xcodegen
+        bash Scripts/package.sh
+      dmg-path: dist/Octoshot-v*-macOS.dmg
+      hardware-requirements: arm64
+      already-notarized: true
+      # Use the toolkit's xcode-27 / /Applications/Xcode_27.app defaults.
+    secrets:
+      DEVELOPER_ID_P12_BASE64: ${{ secrets.DEVELOPER_ID_P12_BASE64 }}
+      DEVELOPER_ID_P12_PASSWORD: ${{ secrets.DEVELOPER_ID_P12_PASSWORD }}
+      DEVELOPER_ID_IDENTITY: ${{ secrets.DEVELOPER_ID_IDENTITY }}
+      APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+      KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+      ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
+      ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
+      ASC_API_KEY_P8_BASE64: ${{ secrets.ASC_API_KEY_P8_BASE64 }}
+      SPARKLE_ED_PRIVATE_KEY: ${{ secrets.SPARKLE_ED_PRIVATE_KEY }}

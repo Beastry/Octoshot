@@ -3,22 +3,26 @@
 # Env:
 #   VERSION         version label for artifacts (default: CFBundleShortVersionString of the build)
 #   SIGN_IDENTITY   codesign identity (default: first "Developer ID Application" in keychain)
+#   DEVELOPER_ID_IDENTITY  toolkit identity; takes precedence over SIGN_IDENTITY
+#   KEYCHAIN_PATH   optional signing keychain (passed explicitly to every codesign)
+#   CODESIGN_FLAGS  whitespace-separated flags (default: --options runtime --timestamp)
+#   ASC_API_KEY_PATH / ASC_API_KEY_ID / ASC_API_ISSUER_ID
+#                   API notarization; all required if any is set, overrides NOTARY_PROFILE
+#   APPLE_TEAM_ID   toolkit signing team; overrides the Xcode build team when supplied
 #   NOTARY_PROFILE  notarytool keychain profile (default: Octoshot-notary); set empty to skip notarization
 #                   create once with: xcrun notarytool store-credentials <name> --apple-id ... --team-id ...
 #                   On this machine: NOTARY_PROFILE=MijiaBar-notary Scripts/package.sh
+set +x
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-NOTARY_PROFILE="${NOTARY_PROFILE-Octoshot-notary}"
 ENT=Octoshot/Octoshot.entitlements
 DERIVED="$PWD/.derivedData-release"
 DIST=dist
 
-if [ -z "${SIGN_IDENTITY:-}" ]; then
-  SIGN_IDENTITY=$(security find-identity -v -p codesigning | grep -o '"Developer ID Application:[^"]*"' | head -1 | tr -d '"' || true)
-fi
-[ -n "$SIGN_IDENTITY" ] || { echo "❌ No Developer ID Application identity found"; exit 1; }
-echo "🔏 Signing identity: $SIGN_IDENTITY"
+source Scripts/release-signing.sh
+configure_release_signing
+echo "🔏 Using configured Developer ID signing"
 
 # llama-mtmd-cli (optional; embed script warns if missing)
 if { [ ! -x build/llama-mtmd/bin/llama-mtmd-cli ] || [ ! -L build/llama-mtmd/bin/libggml.dylib ]; } && [ -x Scripts/fetch-llama-mtmd.sh ]; then
@@ -26,10 +30,14 @@ if { [ ! -x build/llama-mtmd/bin/llama-mtmd-cli ] || [ ! -L build/llama-mtmd/bin
 fi
 [ -x build/llama-mtmd/bin/llama-mtmd-cli ] || echo "warning: llama-mtmd-cli missing; LaTeX helper may be incomplete"
 
-command -v xcodegen >/dev/null && xcodegen generate >/dev/null
+xcodegen generate --spec project.yml >/dev/null
 
 # Full MLX (project.yml). Skip plugin validation like CI mlx job.
 XB=(xcodebuild -project Octoshot.xcodeproj -derivedDataPath "$DERIVED" -configuration Release -skipPackagePluginValidation)
+# Build the full MLX project for arm64 without requiring automatic-signing
+# provisioning; the Developer ID pass below signs every nested component.
+XB+=(ARCHS=arm64 CODE_SIGNING_ALLOWED=NO)
+if [ -n "${APPLE_TEAM_ID:-}" ]; then XB+=("DEVELOPMENT_TEAM=$APPLE_TEAM_ID"); fi
 "${XB[@]}" -scheme Octoshot -resolvePackageDependencies
 for scheme in octoshot-cli Octoshot; do
   "${XB[@]}" -scheme "$scheme" build
@@ -42,8 +50,6 @@ APP="$DIST/Octoshot.app"
 ditto "$SRC_APP" "$APP"
 ZIP="$DIST/Octoshot-v$VERSION-macOS.zip"
 DMG="$DIST/Octoshot-v$VERSION-macOS.dmg"
-
-sign() { codesign --force --sign "$SIGN_IDENTITY" --options runtime --timestamp "$@"; }
 
 # Sparkle ships nested helpers signed by the Sparkle project; re-sign inside-out before the
 # framework bundle (see https://sparkle-project.org/documentation/sandboxing/).
@@ -96,19 +102,7 @@ while IFS= read -r -d '' fw; do sign "$fw"; done < <(find "$APP/Contents/Framewo
 sign --entitlements "$ENT" "$APP"
 codesign --verify --deep --strict --verbose=2 "$APP"
 
-notarize() {
-  local file="$1" log="$DIST/notary-$(basename "$1").log" i
-  for i in 1 2 3; do
-    if xcrun notarytool submit "$file" --keychain-profile "$NOTARY_PROFILE" --wait 2>&1 | tee "$log"; then
-      grep -q "status: Accepted" "$log" && return 0
-      grep -qi "not found\|keychain" "$log" || break
-    fi
-    echo "↻ retrying notarytool ($i)…"; sleep 3
-  done
-  echo "❌ Notarization failed: xcrun notarytool log <id> --keychain-profile $NOTARY_PROFILE"; return 1
-}
-
-if [ -n "$NOTARY_PROFILE" ]; then
+if [ "$NOTARIZE" = true ]; then
   echo "📮 Notarizing app…"
   ditto -c -k --keepParent "$APP" "$DIST/notarize-app.zip"
   notarize "$DIST/notarize-app.zip"
@@ -123,9 +117,9 @@ STAGE="$DIST/dmg" && mkdir -p "$STAGE"
 ditto "$APP" "$STAGE/Octoshot.app" && ln -s /Applications "$STAGE/Applications"
 hdiutil create -volname "Octoshot" -srcfolder "$STAGE" -ov -format UDZO "$DMG" >/dev/null
 rm -rf "$STAGE"
-codesign --force --sign "$SIGN_IDENTITY" --timestamp "$DMG"
+release_codesign --timestamp "$DMG"
 
-if [ -n "$NOTARY_PROFILE" ]; then
+if [ "$NOTARIZE" = true ]; then
   echo "📮 Notarizing DMG…"
   notarize "$DMG"
   xcrun stapler staple "$DMG"

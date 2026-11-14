@@ -26,7 +26,7 @@
 	<true/>
 	<!-- Sparkle 2 (EdDSA); see Docs/sparkle.md -->
 	<key>SUFeedURL</key>
-	<string>https://beastry.github.io/Octoshot/appcast.xml</string>
+	<string>https://github.com/Beastry/Octoshot/releases/latest/download/appcast.xml</string>
 	<key>SUPublicEDKey</key>
 	<string>nSzW5bl2y0QW/PGbwW+0wsRFldjErHSOWFqFWP4GuHc=</string>
 	<key>SUEnableAutomaticChecks</key>

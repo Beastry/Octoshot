@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
-# Sign a notarized Octoshot DMG with Sparkle EdDSA and write website/public/appcast.xml for GitHub Pages.
+# Sign a notarized Octoshot DMG with Sparkle EdDSA and write a local release asset.
+# Official CI uses macos-release instead; neither path updates the Pages feed.
 #
 # Environment:
 #   VERSION         Marketing version (optional; inferred from DMG name)
 #   DMG_PATH        Notarized DMG (default: dist/Octoshot-v$VERSION-macOS.dmg)
 #   SPARKLE_KEY     Private EdDSA key file (Sparkle export format); default ~/octoshot-private/sparkle/eddsa_priv.key
 #   DOWNLOAD_URL    enclosure URL (default: GitHub Release asset URL)
+#   APPCAST_PATH    local output (default: dist/appcast.xml)
 #
 # Does not create a GitHub Release or upload assets.
 set -euo pipefail
@@ -35,6 +37,7 @@ fi
 VERSION="${VERSION:-$(basename "$DMG_PATH" | sed -E 's/^Octoshot-v//; s/-macOS\.dmg$//; s/-unsigned$//')}"
 DMG_BASENAME="Octoshot-v${VERSION}-macOS.dmg"
 DOWNLOAD_URL="${DOWNLOAD_URL:-https://github.com/Beastry/Octoshot/releases/download/v${VERSION}/${DMG_BASENAME}}"
+APPCAST_PATH="${APPCAST_PATH:-dist/appcast.xml}"
 
 STAGE=$(mktemp -d /tmp/octoshot-appcast.XXXXXX)
 trap 'rm -rf "$STAGE"' EXIT
@@ -47,27 +50,27 @@ fi
 "$SP/bin/generate_appcast" \
   --ed-key-file "$KEY" \
   --download-url-prefix "https://github.com/Beastry/Octoshot/releases/download/v${VERSION}/" \
-  --link "https://beastry.github.io/Octoshot/" \
+  --link "https://github.com/Beastry/Octoshot/releases/latest/download/appcast.xml" \
   --embed-release-notes \
   -o "$STAGE/appcast.xml" \
   "$STAGE"
 
 python3 Scripts/check-arm64-appcast.py "$STAGE/appcast.xml"
 
-mkdir -p website/public
-cp "$STAGE/appcast.xml" website/public/appcast.xml
+mkdir -p "$(dirname "$APPCAST_PATH")"
+cp "$STAGE/appcast.xml" "$APPCAST_PATH"
 
-python3 - "$DOWNLOAD_URL" <<'PY'
+python3 - "$DOWNLOAD_URL" "$APPCAST_PATH" <<'PY'
 import re
 import sys
 from pathlib import Path
 
 url = sys.argv[1]
-path = Path("website/public/appcast.xml")
+path = Path(sys.argv[2])
 text = path.read_text()
 text2, n = re.subn(r'(<enclosure[^>]*\surl=")[^"]+(")', rf"\1{url}\2", text, count=1)
 path.write_text(text2 if n else text)
-print(f"✅ website/public/appcast.xml (enclosure → {url})" if n else "⚠️  no enclosure rewritten")
+print(f"✅ {path} (enclosure → {url})" if n else "⚠️  no enclosure rewritten")
 PY
 
-head -40 website/public/appcast.xml
+head -40 "$APPCAST_PATH"
