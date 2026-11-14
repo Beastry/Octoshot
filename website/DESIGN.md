@@ -85,7 +85,7 @@ System `prefers-color-scheme` only. Raster assets: `<picture>` light/dark varian
 
 - **Keep images out of git** — serve from R2/CDN (e.g. `files.neardws.com`); repo holds paths only (`src/config/assets.ts`).
 - Purge Cloudflare cache after deploy when using CDN.
-- Appcast on same GitHub Pages site = production feed (`public/appcast.xml` when ready).
+- New-build Sparkle feed: `https://github.com/Beastry/Octoshot/releases/latest/download/appcast.xml`, enabled by human stable/latest publication. The historical Pages `public/appcast.xml` is separate and not automatically updated by Releases; compatibility remains future work (see `Docs/sparkle.md`).
 - Generate facts (version) from real release state when wired; per-language screenshots on CDN.
 - CI `--check` for stale generated output (future).
 - **Download button:** resolve latest `.dmg` via GitHub API; **fallback** to releases page on failure.
