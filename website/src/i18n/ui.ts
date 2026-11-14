@@ -361,6 +361,6 @@ export function getCopy(locale: Locale): LandingCopy {
   return locale === 'zh' ? zh : en;
 }
 
-export const RELEASE_URL = 'https://github.com/neardws/Octoshot/releases/latest';
-export const REPO_URL = 'https://github.com/neardws/Octoshot';
-export const ISSUES_URL = 'https://github.com/neardws/Octoshot/issues';
+export const RELEASE_URL = 'https://github.com/Beastry/Octoshot/releases/latest';
+export const REPO_URL = 'https://github.com/Beastry/Octoshot';
+export const ISSUES_URL = 'https://github.com/Beastry/Octoshot/issues';

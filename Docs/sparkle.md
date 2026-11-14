@@ -4,11 +4,17 @@ Octoshot uses [Sparkle 2](https://sparkle-project.org/) for signed, notarized up
 
 ## Feed URL
 
-Released builds read:
+New releases built from this checkout read:
 
-`https://www.neardws.com/Octoshot/appcast.xml`
+`https://beastry.github.io/Octoshot/appcast.xml`
 
-The appcast is published from `website/public/appcast.xml` when the site deploys from `main` (GitHub Pages, custom domain `www.neardws.com`).
+The appcast is published from `website/public/appcast.xml` when the site deploys from `main` (GitHub Pages at `https://beastry.github.io/Octoshot/`). This URL migration changes future generation defaults only; the signed v0.3.2 feed is a release artifact and is not regenerated or rewritten by this change.
+
+### Already-installed clients are not migrated
+
+Already-installed v0.3.2 (and earlier) builds still request `https://www.neardws.com/Octoshot/appcast.xml`, which currently returns HTTP 404 (verified November 14, 2026). Changing `SUFeedURL` in this repository only affects newly built releases: it does **not** make those old clients compatible or migrate their update URL.
+
+Compatibility for old clients requires a separate **HTTPS redirect or proxy** from `https://www.neardws.com/Octoshot/appcast.xml` to `https://beastry.github.io/Octoshot/appcast.xml`. Configuring that redirect or proxy is out of scope for this PR.
 
 ## Checking for updates
 
@@ -54,7 +60,7 @@ export DMG_PATH=dist/Octoshot-v0.2.1-macOS.dmg
 bash Scripts/generate-appcast.sh
 ```
 
-Commit `website/public/appcast.xml`, merge to `main`, and ensure the release DMG is uploaded to GitHub Releases at the URL used in the appcast enclosure (for example `https://github.com/neardws/Octoshot/releases/download/v0.2.1/Octoshot-v0.2.1-macOS.dmg`).
+Commit `website/public/appcast.xml`, merge to `main`, and ensure the release DMG is uploaded to GitHub Releases at the URL used in the appcast enclosure (for example `https://github.com/Beastry/Octoshot/releases/download/v0.2.1/Octoshot-v0.2.1-macOS.dmg`). The default enclosure and `--download-url-prefix` use `https://github.com/Beastry/Octoshot/releases/download/v${VERSION}/`; `--link` uses `https://beastry.github.io/Octoshot/`.
 
 ## Apple Silicon-only releases
 

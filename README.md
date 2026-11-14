@@ -2,7 +2,7 @@
 
 **八只手，一次截完**
 
-[Octoshot](https://github.com/neardws/Octoshot) 是一款开源（MIT）的 macOS 原生截图工具：基于 Swift、SwiftUI + AppKit 与 ScreenCaptureKit，强调**本机处理**与**隐私优先**，面向科研写作者与开发者。菜单栏常驻、无 Dock 图标；简体中文系统下显示名为 **一酱**。应用图标为原创卡通章鱼 mascot（半眯眼、略带嫌弃的表情，举着取景框——与任何既有版权角色无关）。
+[Octoshot](https://github.com/Beastry/Octoshot) 是一款开源（MIT）的 macOS 原生截图工具：基于 Swift、SwiftUI + AppKit 与 ScreenCaptureKit，强调**本机处理**与**隐私优先**，面向科研写作者与开发者。菜单栏常驻、无 Dock 图标；简体中文系统下显示名为 **一酱**。应用图标为原创卡通章鱼 mascot（半眯眼、略带嫌弃的表情，举着取景框——与任何既有版权角色无关）。
 
 正式发布版本仅支持 Apple Silicon（arm64）；Intel Mac 请保留旧版。内置 MLX 与 llama AI 均仅支持 Apple Silicon。
 
@@ -25,15 +25,15 @@
 
 | Issue | 功能 |
 |-------|------|
-| [#2](https://github.com/neardws/Octoshot/issues/2) | 区域选择十字线与放大镜 |
-| [#3](https://github.com/neardws/Octoshot/issues/3) | 窗口检测与高亮 |
-| [#4](https://github.com/neardws/Octoshot/issues/4) | 快速访问缩略图体验增强 |
-| [#5](https://github.com/neardws/Octoshot/issues/5) | 自动脱敏（本机 Vision） |
-| [#6](https://github.com/neardws/Octoshot/issues/6) | 询问本机 AI（Ollama 等 OpenAI 兼容接口） |
-| [#7](https://github.com/neardws/Octoshot/issues/7) | 截图 → LaTeX |
-| [#8](https://github.com/neardws/Octoshot/issues/8) | 论文图/表助手与 Clips 库 |
-| [#9](https://github.com/neardws/Octoshot/issues/9) | 开发者模式（取色、标尺、Markdown 粘贴） |
-| [#13](https://github.com/neardws/Octoshot/issues/13) | Agent 接口：`octoshot` CLI、stdio MCP、URL scheme、快捷指令 |
+| [#2](https://github.com/Beastry/Octoshot/issues/2) | 区域选择十字线与放大镜 |
+| [#3](https://github.com/Beastry/Octoshot/issues/3) | 窗口检测与高亮 |
+| [#4](https://github.com/Beastry/Octoshot/issues/4) | 快速访问缩略图体验增强 |
+| [#5](https://github.com/Beastry/Octoshot/issues/5) | 自动脱敏（本机 Vision） |
+| [#6](https://github.com/Beastry/Octoshot/issues/6) | 询问本机 AI（Ollama 等 OpenAI 兼容接口） |
+| [#7](https://github.com/Beastry/Octoshot/issues/7) | 截图 → LaTeX |
+| [#8](https://github.com/Beastry/Octoshot/issues/8) | 论文图/表助手与 Clips 库 |
+| [#9](https://github.com/Beastry/Octoshot/issues/9) | 开发者模式（取色、标尺、Markdown 粘贴） |
+| [#13](https://github.com/Beastry/Octoshot/issues/13) | Agent 接口：`octoshot` CLI、stdio MCP、URL scheme、快捷指令 |
 
 ### Agent 接口（#13）
 
@@ -68,7 +68,7 @@ URL 示例：`octoshot://capture?mode=fullscreen`（区域/窗口模式会打开
 
 ```bash
 brew install xcodegen
-git clone https://github.com/neardws/Octoshot.git
+git clone https://github.com/Beastry/Octoshot.git
 cd Octoshot
 xcodegen generate
 open Octoshot.xcodeproj
@@ -106,11 +106,11 @@ tccutil reset ScreenCapture com.neardws.Octoshot
 
 ## 应用内更新（Sparkle）
 
-正式发布的 Octoshot 通过 Sparkle 2 检查 [站点上的 appcast](https://www.neardws.com/Octoshot/appcast.xml)。菜单栏或 **设置 → 关于** 中可选择 **检查更新…**。维护者签名与发布流程见 [Docs/sparkle.md](Docs/sparkle.md)。
+正式发布的 Octoshot 通过 Sparkle 2 检查 [站点上的 appcast](https://beastry.github.io/Octoshot/appcast.xml)。菜单栏或 **设置 → 关于** 中可选择 **检查更新…**。维护者签名与发布流程见 [Docs/sparkle.md](Docs/sparkle.md)。
 
 ## 参与贡献
 
-欢迎 Issue 与 Pull Request：[neardws/Octoshot](https://github.com/neardws/Octoshot)。请先 `xcodegen generate` 再构建；修改应用图标可运行 `python3 Scripts/generate_icons.py`。
+欢迎 Issue 与 Pull Request：[Beastry/Octoshot](https://github.com/Beastry/Octoshot)。请先 `xcodegen generate` 再构建；修改应用图标可运行 `python3 Scripts/generate_icons.py`。
 
 ## 截图自动化安全
 
@@ -132,7 +132,7 @@ tccutil reset ScreenCapture com.neardws.Octoshot
 
 **Eight arms, one shot.**
 
-[Octoshot](https://github.com/neardws/Octoshot) is an open-source (**MIT**) native macOS screenshot app built with Swift, SwiftUI + AppKit, and ScreenCaptureKit. It is **on-device** and **privacy-first**, aimed at **researchers and developers**. The app lives in the menu bar (no Dock icon). On Simplified Chinese systems the display name is **一酱**. The mascot is an **original** cartoon octopus with a deadpan, half-lidded, slightly grumpy look, holding a crop viewfinder—not based on any copyrighted character.
+[Octoshot](https://github.com/Beastry/Octoshot) is an open-source (**MIT**) native macOS screenshot app built with Swift, SwiftUI + AppKit, and ScreenCaptureKit. It is **on-device** and **privacy-first**, aimed at **researchers and developers**. The app lives in the menu bar (no Dock icon). On Simplified Chinese systems the display name is **一酱**. The mascot is an **original** cartoon octopus with a deadpan, half-lidded, slightly grumpy look, holding a crop viewfinder—not based on any copyrighted character.
 
 ## Available now
 
@@ -153,15 +153,15 @@ Planned or in-progress work is tracked in GitHub issues:
 
 | Issue | Feature |
 |-------|---------|
-| [#2](https://github.com/neardws/Octoshot/issues/2) | Area crosshair & loupe |
-| [#3](https://github.com/neardws/Octoshot/issues/3) | Window detection & highlight |
-| [#4](https://github.com/neardws/Octoshot/issues/4) | Quick-access thumbnail polish |
-| [#5](https://github.com/neardws/Octoshot/issues/5) | Auto-redact (on-device Vision) |
-| [#6](https://github.com/neardws/Octoshot/issues/6) | Ask local AI (Ollama / OpenAI-compatible) |
-| [#7](https://github.com/neardws/Octoshot/issues/7) | Screenshot → LaTeX |
-| [#8](https://github.com/neardws/Octoshot/issues/8) | Paper figure/table assistant & Clips library |
-| [#9](https://github.com/neardws/Octoshot/issues/9) | Developer mode (color picker, ruler, Markdown for issues) |
-| [#13](https://github.com/neardws/Octoshot/issues/13) | Agent interface: `octoshot` CLI, stdio MCP, URL scheme, Shortcuts |
+| [#2](https://github.com/Beastry/Octoshot/issues/2) | Area crosshair & loupe |
+| [#3](https://github.com/Beastry/Octoshot/issues/3) | Window detection & highlight |
+| [#4](https://github.com/Beastry/Octoshot/issues/4) | Quick-access thumbnail polish |
+| [#5](https://github.com/Beastry/Octoshot/issues/5) | Auto-redact (on-device Vision) |
+| [#6](https://github.com/Beastry/Octoshot/issues/6) | Ask local AI (Ollama / OpenAI-compatible) |
+| [#7](https://github.com/Beastry/Octoshot/issues/7) | Screenshot → LaTeX |
+| [#8](https://github.com/Beastry/Octoshot/issues/8) | Paper figure/table assistant & Clips library |
+| [#9](https://github.com/Beastry/Octoshot/issues/9) | Developer mode (color picker, ruler, Markdown for issues) |
+| [#13](https://github.com/Beastry/Octoshot/issues/13) | Agent interface: `octoshot` CLI, stdio MCP, URL scheme, Shortcuts |
 
 ### Agent interface (#13)
 
@@ -201,7 +201,7 @@ MCP tools: `capture_screen`, `capture_window`, `list_windows`, `list_displays`, 
 
 ```bash
 brew install xcodegen
-git clone https://github.com/neardws/Octoshot.git
+git clone https://github.com/Beastry/Octoshot.git
 cd Octoshot
 xcodegen generate
 open Octoshot.xcodeproj
@@ -235,11 +235,11 @@ Relaunch the app and enable it again under **Privacy & Security → Screen Recor
 
 ## In-app updates (Sparkle)
 
-Shipped Octoshot builds use Sparkle 2 to read the [site appcast](https://www.neardws.com/Octoshot/appcast.xml). Use **Check for Updates…** from the menu bar or **Settings → About**. Maintainer signing and appcast generation are documented in [Docs/sparkle.md](Docs/sparkle.md).
+New Octoshot releases use Sparkle 2 to read the [site appcast](https://beastry.github.io/Octoshot/appcast.xml). Use **Check for Updates…** from the menu bar or **Settings → About**. Already-installed v0.3.2 and earlier clients are not migrated by this change; the required separate legacy HTTPS redirect or proxy, maintainer signing, and appcast generation are documented in [Docs/sparkle.md](Docs/sparkle.md).
 
 ## Contributing
 
-Issues and pull requests are welcome at [neardws/Octoshot](https://github.com/neardws/Octoshot). Run `xcodegen generate` before building; regenerate icons with `python3 Scripts/generate_icons.py` when needed.
+Issues and pull requests are welcome at [Beastry/Octoshot](https://github.com/Beastry/Octoshot). Run `xcodegen generate` before building; regenerate icons with `python3 Scripts/generate_icons.py` when needed.
 
 ## Capture automation safety
 

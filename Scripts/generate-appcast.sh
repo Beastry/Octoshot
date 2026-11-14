@@ -34,7 +34,7 @@ fi
 
 VERSION="${VERSION:-$(basename "$DMG_PATH" | sed -E 's/^Octoshot-v//; s/-macOS\.dmg$//; s/-unsigned$//')}"
 DMG_BASENAME="Octoshot-v${VERSION}-macOS.dmg"
-DOWNLOAD_URL="${DOWNLOAD_URL:-https://github.com/neardws/Octoshot/releases/download/v${VERSION}/${DMG_BASENAME}}"
+DOWNLOAD_URL="${DOWNLOAD_URL:-https://github.com/Beastry/Octoshot/releases/download/v${VERSION}/${DMG_BASENAME}}"
 
 STAGE=$(mktemp -d /tmp/octoshot-appcast.XXXXXX)
 trap 'rm -rf "$STAGE"' EXIT
@@ -46,8 +46,8 @@ fi
 
 "$SP/bin/generate_appcast" \
   --ed-key-file "$KEY" \
-  --download-url-prefix "https://github.com/neardws/Octoshot/releases/download/v${VERSION}/" \
-  --link "https://www.neardws.com/Octoshot/" \
+  --download-url-prefix "https://github.com/Beastry/Octoshot/releases/download/v${VERSION}/" \
+  --link "https://beastry.github.io/Octoshot/" \
   --embed-release-notes \
   -o "$STAGE/appcast.xml" \
   "$STAGE"

@@ -19,7 +19,7 @@ export const assets = {
 };
 
 export const GITHUB = {
-  repo: 'neardws/Octoshot',
-  releasesLatest: 'https://github.com/neardws/Octoshot/releases/latest',
-  apiLatest: 'https://api.github.com/repos/neardws/Octoshot/releases/latest',
+  repo: 'Beastry/Octoshot',
+  releasesLatest: 'https://github.com/Beastry/Octoshot/releases/latest',
+  apiLatest: 'https://api.github.com/repos/Beastry/Octoshot/releases/latest',
 };
