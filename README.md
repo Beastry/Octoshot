@@ -2,7 +2,7 @@
 
 **八只手，一次截完**
 
-[Octoshot](https://github.com/Beastry/Octoshot) 是一款开源（MIT）的 macOS 原生截图工具：基于 Swift、SwiftUI + AppKit 与 ScreenCaptureKit，强调**本机处理**与**隐私优先**，面向科研写作者与开发者。菜单栏常驻、无 Dock 图标；简体中文系统下显示名为 **一酱**。应用图标为原创卡通章鱼 mascot（半眯眼、略带嫌弃的表情，举着取景框——与任何既有版权角色无关）。
+[Octoshot](https://github.com/Beastry/Octoshot) 是一款开源（GPL-3.0-only）的 macOS 原生截图工具：基于 Swift、SwiftUI + AppKit 与 ScreenCaptureKit，强调**本机处理**与**隐私优先**，面向科研写作者与开发者。菜单栏常驻、无 Dock 图标；简体中文系统下显示名为 **一酱**。应用图标为原创卡通章鱼 mascot（半眯眼、略带嫌弃的表情，举着取景框——与任何既有版权角色无关）。
 
 正式发布版本仅支持 Apple Silicon（arm64）；Intel Mac 请保留旧版。内置 MLX 与 llama AI 均仅支持 Apple Silicon。
 
@@ -124,7 +124,20 @@ tccutil reset ScreenCapture com.neardws.Octoshot
 
 ## 许可证
 
-[MIT License](LICENSE) · Copyright © 2026 [neardws](https://github.com/neardws)
+本仓库的**第一方**源代码、文档、脚本、网站文案与原创图像（含原创章鱼吉祥物）以 **GNU GPL 第 3 版且仅第 3 版** 提供。
+
+- SPDX：`GPL-3.0-only`
+- 许可证全文（未经修改的 GNU GPL v3）：[LICENSE](LICENSE)
+- 版权：Copyright (c) 2026 [neardws](https://github.com/neardws)
+- 范围说明：[LICENSES/README.md](LICENSES/README.md)
+
+本项目只授予 GPL 第 3 版，不包含“或任何后续版本”的选择。
+
+在此变更之前，仓库以 MIT 许可证分发，版权人为 neardws。MIT 授权不可撤销。已经按 MIT 取得的副本——包括带有 MIT `LICENSE` 的历史提交，以及据此构建的发行版——仍可按 MIT 使用**那一份副本**。原来的版权行和许可声明原样保存在 [LICENSES/MIT-legacy.txt](LICENSES/MIT-legacy.txt)。该文件记录的是变更前的授权，不是当前第一方树的许可证。
+
+Git 历史里还有在 MIT 时期提交的贡献（包括 skywalker）。本次变更不新增版权人，也不收回这些贡献已经给出的 MIT 许可。MIT 与 GPL-3.0-only 兼容，因此当前树可以按 GPL-3.0-only 分发，同时保留上述 MIT 声明。
+
+第三方组件、Sparkle、模型权重及其原有归属保持不变，不随第一方代码改为 GPL。Sparkle 2 仍是 `project.yml` 中的外部包（sparkle-project/Sparkle，from 2.10.0）。模型与 llama.cpp 的既有许可说明见 [Docs/EMBEDDED_AI.md](Docs/EMBEDDED_AI.md)。
 
 ---
 
@@ -132,7 +145,7 @@ tccutil reset ScreenCapture com.neardws.Octoshot
 
 **Eight arms, one shot.**
 
-[Octoshot](https://github.com/Beastry/Octoshot) is an open-source (**MIT**) native macOS screenshot app built with Swift, SwiftUI + AppKit, and ScreenCaptureKit. It is **on-device** and **privacy-first**, aimed at **researchers and developers**. The app lives in the menu bar (no Dock icon). On Simplified Chinese systems the display name is **一酱**. The mascot is an **original** cartoon octopus with a deadpan, half-lidded, slightly grumpy look, holding a crop viewfinder—not based on any copyrighted character.
+[Octoshot](https://github.com/Beastry/Octoshot) is an open-source (**GPL-3.0-only**) native macOS screenshot app built with Swift, SwiftUI + AppKit, and ScreenCaptureKit. It is **on-device** and **privacy-first**, aimed at **researchers and developers**. The app lives in the menu bar (no Dock icon). On Simplified Chinese systems the display name is **一酱**. The mascot is an **original** cartoon octopus with a deadpan, half-lidded, slightly grumpy look, holding a crop viewfinder—not based on any copyrighted character.
 
 ## Available now
 
@@ -258,4 +271,17 @@ capturing another display.
 
 ## License
 
-[MIT License](LICENSE) · Copyright © 2026 [neardws](https://github.com/neardws)
+**First-party** source, documentation, scripts, website copy, and original artwork in this repository (including the original octopus mascot) are released under the **GNU General Public License, version 3 only**.
+
+- SPDX: `GPL-3.0-only`
+- Unmodified GNU GPL v3 text: [LICENSE](LICENSE)
+- Copyright (c) 2026 [neardws](https://github.com/neardws)
+- Scope: [LICENSES/README.md](LICENSES/README.md)
+
+This grant is version 3 only. It does not include the option of any later GPL version.
+
+Before this change the repository was distributed under the MIT License, Copyright (c) 2026 neardws. That MIT grant is irrevocable. Anyone who already received a copy under MIT — including historical commits that still contain the MIT `LICENSE`, and builds made from them — keeps the MIT rights for **that copy**. The original copyright line and permission notice are preserved verbatim in [LICENSES/MIT-legacy.txt](LICENSES/MIT-legacy.txt). That file records the earlier grant. It is not the license for the current first-party tree.
+
+Git history also includes contributions made while the project license was MIT, including commits by skywalker. This change does not name a new copyright owner and does not revoke the MIT permission those contributions already granted. MIT is compatible with GPL-3.0-only, so the current tree is distributed under GPL-3.0-only while that preserved MIT notice stays in place.
+
+Third-party components, Sparkle, model weights, and their existing attributions stay on their own licenses. Sparkle 2 remains an external package in `project.yml` (sparkle-project/Sparkle, from 2.10.0). Model and llama.cpp attributions already recorded in the repo are unchanged; see [Docs/EMBEDDED_AI.md](Docs/EMBEDDED_AI.md) and [LICENSES/README.md](LICENSES/README.md).

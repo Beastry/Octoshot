@@ -337,7 +337,7 @@ private struct AboutSettingsPane: View {
                 HelpOpener.open()
             }
             .buttonStyle(.bordered)
-            Text(OctoshotL10n.text("Released under the MIT License."))
+            Text(OctoshotL10n.text("First-party code is released under GPL-3.0-only."))
                 .font(.caption)
                 .foregroundStyle(.secondary)
             Text(OctoshotL10n.text("Embedded AI weights: SmolVLM2 (Apache-2.0, mlx-community) and pix2tex-mfr GGUF (MIT, cstr). MLX Swift LM is Apache-2.0."))
