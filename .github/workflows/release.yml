@@ -19,9 +19,9 @@ jobs:
     # Its guard/package jobs retain contents: read and draft receives no signing secrets.
     permissions:
       contents: write
-    uses: Beastry/macos-release/.github/workflows/release.yml@650b2ace4d6c3ebd3294bba834f861ef84d46e16
+    uses: Beastry/macos-release/.github/workflows/release.yml@1dee80800386e1794fdb18e1f0144132f2c77605
     with:
-      toolkit-ref: 650b2ace4d6c3ebd3294bba834f861ef84d46e16
+      toolkit-ref: 1dee80800386e1794fdb18e1f0144132f2c77605
       expected-repository: Beastry/Octoshot
       tag: ${{ inputs.tag }}
       package-command: |
