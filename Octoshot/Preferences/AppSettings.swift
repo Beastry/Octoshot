@@ -31,7 +31,7 @@ final class AppSettings: ObservableObject {
     static let shared = AppSettings()
 
     static let defaultFilenamePattern = "{prefix} {date} {time}"
-    static let repositoryURL = URL(string: "https://github.com/neardws/Octoshot")!
+    static let repositoryURL = URL(string: "https://github.com/Beastry/Octoshot")!
 
     private enum Keys {
         static let saveDirectory = "saveDirectory"
